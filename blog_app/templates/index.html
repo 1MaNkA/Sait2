@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>{% block title %} Комментарии и пожелания нашей команде{% endblock %}</h1>
+    {% for post in posts %}
+<div class="ss">
+        <div class="container">
+        <a href="{{ url_for('post', post_id=post['id']) }}">
+            <h2 class="text-dark">{{ post['title'] }}</h2>
+        </a>
+        <span class="badge badge-info">{{ post['created'] }}</span>
+        <a href="{{ url_for('edit', id=post['id']) }}">
+            <span class="badge badge-primary">Редактировать</span>
+        </a>
+        <hr>
+</div>
+    </div>
+<hr>
+
+    {% endfor %}
+{% endblock %}
