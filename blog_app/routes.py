@@ -20,11 +20,18 @@ def get_post(post_id):
     return post
 
 
-@app.route('/news')
+@app.route('/news',methods=('GET', 'POST'))
 def index():
     conn = get_db_connection()
     posts = conn.execute('SELECT * FROM posts').fetchall()
-    conn.close()
+    if request.method == 'POST':
+        title = request.form['title']
+        posts = conn.execute('SELECT * FROM posts WHERE title = ?',
+                                (title,)).fetchmany(1)
+        if not posts:
+            posts = conn.execute('SELECT * FROM posts').fetchall()
+            return render_template('index.html', posts=posts)
+        return render_template('index.html', posts=posts)
     return render_template('index.html', posts=posts)
 
 @app.route('/about')
