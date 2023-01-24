@@ -34,6 +34,7 @@ def index():
         return render_template('index.html', posts=posts)
     return render_template('index.html', posts=posts)
 
+
 @app.route('/about')
 def about():
     return render_template('about.html')
@@ -64,7 +65,7 @@ def create():
 
     return render_template('create.html')
 
-@app.route('/<int:id>/edit', methods=('GET', 'POST'))
+@app.route('/1234/<int:id>/edit', methods=('GET', 'POST'))
 def edit(id):
     post = get_post(id)
 
